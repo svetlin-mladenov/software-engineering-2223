@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./homework/12_B/25_Hristiyan/homework1"
+    ]
+}
