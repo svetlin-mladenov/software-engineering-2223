@@ -23,6 +23,8 @@ def compress(message):
                 consecutive_matches = 1
             last = c
     compressed += str(consecutive_matches)
+    if len(compressed) > len(message):
+        return message
     return compressed
 
 
@@ -30,7 +32,5 @@ def test_compress():
     assert compress("aabcccccaaa") == "a2b1c5a3"
     assert compress("aabccccca") == "a2b1c5a1"
 
-def 
-    assert compress("") == ""
-
-test_compress()
+def test_inefficient_compression():
+    assert compress("abc") == "abc"
