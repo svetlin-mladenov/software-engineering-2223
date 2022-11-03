@@ -1,7 +1,8 @@
 __package__ = "circle"
 
 from enum import Enum, auto
-from math import pow, sqrt
+from math import sqrt
+
 
 class Intersection(Enum):
     NO_POINTS = auto()
@@ -40,4 +41,5 @@ def circle_intersection(c1: Circle, c2: Circle) -> Intersection:
         case _:
             print(distance)
             return Intersection.UNIDENTIFIED
+
 
