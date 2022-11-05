@@ -17,20 +17,16 @@ class Circle:
 
   def check(self,other):    
     dist = sqrt((self.x-other.x)**2 + (self.y-other.y)**2)
-    print (self.x)
-    print (other.x)
-    print (self.y)
-    print (other.y)
 
     if self.radius <= 0 or other.radius <= 0:
-        return Intersection.INVALID.name # INVALID
+        return Intersection.INVALID.name 
     if self.x == other.x and self.y == other.y and self.radius == other.radius:
-        return Intersection.SAME.name # SAME
+        return Intersection.SAME.name 
     elif (dist <= (self.radius - other.radius) or dist <= (other.radius - self.radius)):
-        return Intersection.INSIDE.name # INSIDE
+        return Intersection.INSIDE.name 
     elif dist == (self.radius + other.radius):
-        return Intersection.TOUCHING.name # TOUCHING
+        return Intersection.TOUCHING.name 
     elif dist < (self.radius + other.radius):
-        return Intersection.INTERSECT.name # INTERSECT
+        return Intersection.INTERSECT.name 
     else:
-        return Intersection.NOTTOUCHING.name # NOTTOUCHING
+        return Intersection.NOTTOUCHING.name 
