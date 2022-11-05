@@ -33,19 +33,19 @@ def test_intersection():
     # Not intersecting
     c1 = Circle(0,0,1)
     c2 = Circle(2,2,1)
-    assert c1.intersection(c2) == IntersectionState.NotIntersecting.name
+    assert c1.intersection(c2) == IntersectionState.NotIntersecting
 
     # Matching
     c1 = Circle(6,6,6)
     c2 = Circle(6,6,6)
-    assert c1.intersection(c2) == IntersectionState.Matching.name
+    assert c1.intersection(c2) == IntersectionState.Matching
 
     # Touching
     c1 = Circle(0,0,8)
     c2 = Circle(0,12,4)
-    assert c1.intersection(c2) == IntersectionState.Touching.name
+    assert c1.intersection(c2) == IntersectionState.Touching
 
     # Intersecting
     c1 = Circle(0,0,8)
     c2 = Circle(0,12,8)
-    assert c1.intersection(c2) == IntersectionState.Intersecting.name
+    assert c1.intersection(c2) == IntersectionState.Intersecting
