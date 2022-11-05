@@ -24,10 +24,10 @@ class Circle:
     def intersection(self, c2):
         distance = self.find_distance_between_centers(c2)
         if (self.r + c2.r) < distance:
-            return IntersectionState.NotIntersecting.name
+            return IntersectionState.NotIntersecting
         elif self == c2:
-            return IntersectionState.Matching.name
+            return IntersectionState.Matching
         elif self.r + c2.r == distance:
-            return IntersectionState.Touching.name
+            return IntersectionState.Touching
         elif (self.r + c2.r) > distance:
-            return IntersectionState.Intersecting.name
+            return IntersectionState.Intersecting
