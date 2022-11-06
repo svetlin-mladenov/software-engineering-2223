@@ -7,6 +7,7 @@ C4 = Circle(2,2,2) # INSIDE
 C5 = Circle(-7,4,5) # TOUCHING
 C6 = Circle(3,4,5) #SAME
 C7 = Circle(1,2,0) # INVALID CIRCLE
+C8 = Circle(3,6,3)
 # https://www.desmos.com/calculator/6sntulfbz2
 
 def test_intersect():
@@ -26,3 +27,6 @@ def test_same():
 
 def test_invalid():
     assert C1.check(C7) == 'INVALID'
+
+def test_insidetouch():
+    assert C1.check(C8) == 'INSIDE'
