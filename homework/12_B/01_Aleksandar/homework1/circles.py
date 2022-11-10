@@ -1,49 +1,51 @@
 from math import *
+from enum import Enum
+
+class Result(Enum):
+    SAME_CIRCLES = 3
+    ONE_POINT = 1
+    TWO_POINTS = 2
+    NO_INTERSECTION = 0
+    ONE_INSIDE_THE_OTHER = 4
+    ERROR = -1
 
 class Circle:
     def __init__(self, x, y, r):
-        self.xx = x
-        self.yy = y
-        self.rr = r
+        self.x = x
+        self.y = y
+        self.r = r
     def __str__(self):
-        return "O = (" + str(self.xx) + ";" + str(self.yy) + ")  radius: " + str(self.rr)
+        return "O = (" + str(self.x) + ";" + str(self.y) + ")  radius: " + str(self.r)
     
 
 def func(a, b):
-    if a.rr <= 0 or b.rr <= 0:
-        return -1
-    if a.rr == b.rr and a.xx == b.xx and a.yy == b.yy:
-        return 3 #same circle
-    distance_between_centers =sqrt((a.xx - b.xx)**2 + (a.yy - b.yy)**2)
-    if distance_between_centers == abs(a.rr + b.rr) or distance_between_centers == abs(a.rr - b.rr):
-        return 1 #one point of intersection
-    if distance_between_centers < abs(a.rr + b.rr) and distance_between_centers > abs(a.rr - b.rr):
-        return 2 #two points of intersection
-    if a.rr > b.rr:
-        if distance_between_centers + b.rr < a.rr:
-            return 4 #one inside the other
-    else:#b.rr > a.rr
-        if distance_between_centers + a.rr < b.rr:
-            return 4 #one inside the other
-    return 0 #no intersection, not inside one another
+    if a.r <= 0 or b.r <= 0:
+        return Result.ERROR
+    if a.r == b.r and a.x == b.x and a.y == b.y:
+        return Result.SAME_CIRCLES #same circle
+    distance_between_centers =sqrt((a.x - b.x)**2 + (a.y - b.y)**2)
+    if distance_between_centers == abs(a.r + b.r) or distance_between_centers == abs(a.r - b.r):
+        return Result.ONE_POINT#one point of intersection
+    if distance_between_centers < abs(a.r + b.r) and distance_between_centers > abs(a.r - b.r):
+        return Result.TWO_POINTS #two points of intersection
+    if a.r > b.r:
+        if distance_between_centers + b.r < a.r:
+            return Result.ONE_INSIDE_THE_OTHER #one inside the other
+    else:
+        if distance_between_centers + a.r < b.r:
+            return Result.ONE_INSIDE_THE_OTHER #one inside the other
+    return Result.NO_INTERSECTION #no intersection, not inside one another
     
 
-c = Circle(0, 0, 2)
-d = Circle(0, 0, 2)
-e = Circle(0, 0, 10)
-f = Circle(1, 0, 1)
-g = Circle(1, 1, 1)
-h = Circle(1, 1, 0)
-j = Circle(5, 5, 1)
-
-
-assert func(c,d) == 3 # same circles
-assert func(g,d) == 2 # two points of intersection
-assert func(f,d) == 1 # one point of intersection
-assert func(h,e) == -1 # false data
-assert func(c,e) == 4 # one inside the other
-assert func(g,e) == 4 # one inside the other with different centers
-assert func(j,c) == 0 # no intersection
-
-
-print(c)
+def test_circle_intersection ():
+    assert func(Circle(0, 0, 2),Circle(0, 0, 2)) == Result.SAME_CIRCLES # same circles
+    assert func(Circle(0, 0, 2),Circle(0, 0, 10)) == Result.ONE_INSIDE_THE_OTHER # one inside the other
+    assert func(Circle(1, 0, 1),Circle(0, 0, 2)) == Result.ONE_POINT # one point of intersection
+    assert func(Circle(1, 1, 1),Circle(0, 0, 2)) == Result.TWO_POINTS # two points of intersection
+    assert func(Circle(1, 1, 1),Circle(0, 0, 10)) == Result.ONE_INSIDE_THE_OTHER # one inside the other with different centers
+    assert func(Circle(1, 1, 0),Circle(0, 0, 10)) == Result.ERROR # false data
+    assert func(Circle(5, 5, 1),Circle(0, 0, 2)) == Result.NO_INTERSECTION # no intersection
+    
+    
+    
+test_circle_intersection()
