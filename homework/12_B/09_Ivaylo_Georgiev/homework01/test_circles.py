@@ -27,25 +27,18 @@ c6 = Circle(-4, 3, 6)
 def circle(c1, c2):
     d = math.sqrt((c1.x - c2.x)**2 + (c1.y - c2.y)**2)
     
-    #Проверка дали стойностите на двете окръжности са еднакви
     if(c1.__dict__ == c2.__dict__):
-        print ("Circles are the same")
-        return Result.Same.value
+        return Result.Same
     elif(d <= c1.radius - c2.radius):
-        print("Circle B is inside A")
-        return Result.B_in_A.value
+        return Result.B_in_A
     elif(d <= c2.radius - c1.radius):
-        print("Circle A is inside B")
-        return Result.A_in_B.value
+        return Result.A_in_B
     elif(d < c1.radius + c2.radius):
-        print("Circle intersect each other")
-        return Result.Intersect.value
+        return Result.Intersect
     elif(d == c1.radius + c2.radius):
-        print("Circle touch each other")
-        return Result.Touch.value
+        return Result.Touch
     else:
-        print("Circle don't touch each other")
-        return Result.No_Touch.value
+        return Result.No_Touch
 
 circle(c1,c3)
 circle(c5,c1)
@@ -55,19 +48,19 @@ circle(c1,c2)
 circle(c2,c4)
 
 def test_circles_are_same():
-    assert circle(c1,c3) == Result.Same.value
+    assert circle(c1,c3) == Result.Same
 
 def test_A_inside_B():
-    assert circle(c5,c1) == Result.A_in_B.value
+    assert circle(c5,c1) == Result.A_in_B
 
 def test_B_inside_A():
-    assert circle(c1,c4) == Result.B_in_A.value
+    assert circle(c1,c4) == Result.B_in_A
 
 def test_circles_intersect():
-    assert circle(c5,c6) == Result.Intersect.value
+    assert circle(c5,c6) == Result.Intersect
 
 def test_cicles_touch():
-    assert circle(c1,c2) == Result.Touch.value
+    assert circle(c1,c2) == Result.Touch
 
 def test_circles_dont_touch():
-    assert circle(c2,c4) == Result.No_Touch.value
+    assert circle(c2,c4) == Result.No_Touch
