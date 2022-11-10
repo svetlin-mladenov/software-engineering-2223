@@ -8,6 +8,7 @@ class CircleValues(Enum):
     EQUAL = "There is no difference in the two circles"
     CONTAINING = "One of the circles complitely surounds the other"
 
+
 class Point:
 
     def __init__(this, x, y):
