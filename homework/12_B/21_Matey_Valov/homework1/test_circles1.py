@@ -19,17 +19,16 @@ class Circle:
         self.r = r
         
 def circle_intersection(a, b):
-    if(a.center.x == b.center.x) and (a.center.y == b.center.y) and (a.r == b.r):
-        return Output.Same.value
-    
     d = math.sqrt((a.center.x - b.center.x) * (a.center.x - b.center.x) + (a.center.y - b.center.y) * (a.center.y - b.center.y))
     
+    if(d == a.r - b.r):
+        return Output.Same.value
     if(d <= a.r - b.r) or (d <= b.r - a.r):
         return Output.OneInOther.value
-    if(d < a.r + b.r):
-        return Output.Intersect.value
     if(d == a.r + b.r):
         return Output.Touch.value
+    if(d < a.r + b.r):
+        return Output.Intersect.value
     
     return Output.NoIntersect.value
 
