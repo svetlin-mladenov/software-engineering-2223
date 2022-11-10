@@ -7,7 +7,7 @@ public enum Case {
   INTERSECT("The circles intersect each other"),
   TOUCH("The circles touch each other"),
   NOT_TOUCH("The circles DO NOT touch each other");
-  
+
   private final String label;
 
   private Case(String label) {
