@@ -16,6 +16,7 @@
     <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
   
     <junit.version>5.9.1</junit.version>
+    <lombok.version>1.18.24</lombok.version>
   </properties>
   
   <dependencyManagement>
@@ -27,10 +28,21 @@
           <type>pom</type>
           <scope>import</scope>
       </dependency>
+      <dependency>
+  	    <groupId>org.projectlombok</groupId>
+  	    <artifactId>lombok</artifactId>
+  	    <version>${lombok.version}</version>
+  		</dependency>
     </dependencies>
   </dependencyManagement>
   
   <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>

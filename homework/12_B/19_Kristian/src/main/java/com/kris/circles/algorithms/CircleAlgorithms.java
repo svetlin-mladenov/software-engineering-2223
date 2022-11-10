@@ -3,43 +3,37 @@ package com.kris.circles.algorithms;
 import com.kris.circles.Circle;
 
 public class CircleAlgorithms {
-  private Circle firstCircle;
-  private Circle secondCircle;
 
-  public CircleAlgorithms(Circle one, Circle two) {
-    firstCircle = one;
-    secondCircle = two;
-  }
+	public String printEnum(Circle circle1, Circle circle2) {
+		return calculateDistance(circle1, circle2).getLabel();
+	}
+	
+	public Case calculateDistance(Circle circle1, Circle circle2) {
+		return getCase(circle1, circle2);
+	}
 
-  public void run() {
-    System.out.println(calculate());
-  }
+	private Case getCase(Circle circle1, Circle circle2) {
+		if (circle1.equals(circle2)) {
+			return Case.EQUAL;
+		}
+		
+		double sideX = Math.abs(circle1.getX() - circle2.getX());
+		double sideY = Math.abs(circle1.getY() - circle2.getY());
+		double distance = Math.hypot(sideX, sideY);
 
-  private String calculate() {
-    double distance = Math.sqrt(Math.pow(Math.abs(firstCircle.getX() - Math.abs(secondCircle.getX())), 2)
-        + Math.pow(Math.abs(firstCircle.getY() - Math.abs(secondCircle.getY())), 2));
+		if (distance <= circle1.getR() - circle2.getR()) {
+			return Case.B_IN_A;
+		}
+		if (distance <= circle2.getR() - circle1.getR()) {
+			return Case.A_IN_B;
+		}
+		if (distance < circle1.getR() + circle2.getR()) {
+			return Case.INTERSECT;
+		}
+		if (distance == circle1.getR() + circle2.getR()) {
+			return Case.TOUCH;
+		}
 
-    return returnCase(distance).getLabel();
-  }
-
-  private Case returnCase(double d) {
-    if (firstCircle.getX() == secondCircle.getX() && firstCircle.getY() == secondCircle.getY()
-        && firstCircle.getR() == secondCircle.getR()) {
-      return Case.EQUAL;
-    }
-    if (d <= firstCircle.getR() - secondCircle.getR()) {
-      return Case.BINA;
-    }
-    if (d <= secondCircle.getR() - firstCircle.getR()) {
-      return Case.AINB;
-    }
-    if (d < firstCircle.getR() + secondCircle.getR()) {
-      return Case.INTERSECT;
-    }
-    if (d == firstCircle.getR() + secondCircle.getR()) {
-      return Case.TOUCH;
-    }
-
-    return Case.NOTTOUCH;
-  }
+		return Case.NOT_TOUCH;
+	}
 }
