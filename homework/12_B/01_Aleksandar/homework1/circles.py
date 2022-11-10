@@ -18,7 +18,7 @@ class Circle:
         return "O = (" + str(self.x) + ";" + str(self.y) + ")  radius: " + str(self.r)
     
 
-def func(a, b):
+def circle_relations(a, b):
     if a.r <= 0 or b.r <= 0:
         return Result.ERROR
     if a.r == b.r and a.x == b.x and a.y == b.y:
@@ -38,13 +38,13 @@ def func(a, b):
     
 
 def test_circle_intersection ():
-    assert func(Circle(0, 0, 2),Circle(0, 0, 2)) == Result.SAME_CIRCLES # same circles
-    assert func(Circle(0, 0, 2),Circle(0, 0, 10)) == Result.ONE_INSIDE_THE_OTHER # one inside the other
-    assert func(Circle(1, 0, 1),Circle(0, 0, 2)) == Result.ONE_POINT # one point of intersection
-    assert func(Circle(1, 1, 1),Circle(0, 0, 2)) == Result.TWO_POINTS # two points of intersection
-    assert func(Circle(1, 1, 1),Circle(0, 0, 10)) == Result.ONE_INSIDE_THE_OTHER # one inside the other with different centers
-    assert func(Circle(1, 1, 0),Circle(0, 0, 10)) == Result.ERROR # false data
-    assert func(Circle(5, 5, 1),Circle(0, 0, 2)) == Result.NO_INTERSECTION # no intersection
+    assert circle_relations(Circle(0, 0, 2),Circle(0, 0, 2)) == Result.SAME_CIRCLES # same circles
+    assert circle_relations(Circle(0, 0, 2),Circle(0, 0, 10)) == Result.ONE_INSIDE_THE_OTHER # one inside the other
+    assert circle_relations(Circle(1, 0, 1),Circle(0, 0, 2)) == Result.ONE_POINT # one point of intersection
+    assert circle_relations(Circle(1, 1, 1),Circle(0, 0, 2)) == Result.TWO_POINTS # two points of intersection
+    assert circle_relations(Circle(1, 1, 1),Circle(0, 0, 10)) == Result.ONE_INSIDE_THE_OTHER # one inside the other with different centers
+    assert circle_relations(Circle(1, 1, 0),Circle(0, 0, 10)) == Result.ERROR # false data
+    assert circle_relations(Circle(5, 5, 1),Circle(0, 0, 2)) == Result.NO_INTERSECTION # no intersection
     
     
     
