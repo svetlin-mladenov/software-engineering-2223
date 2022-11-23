@@ -17,18 +17,18 @@ class ChessBoard():
 
     def print(this):
 
-        print("  ┏━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┳━━━┓")
+        print("  ┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓")
         for i in range(8):
             print(f"{8-i} ┃ ", end="")
 
             for j in range(8):
-                print(f"{this.board[i][j].symbol} ┃ ", end="")
+                print(f"{this.board[i][j].symbol}  ┃ ", end="")
 
             if i !=7 :
-                print("\n  ┣━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━╋━━━┫")
+                print("\n  ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫")
 
-        print("\n  ┗━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┻━━━┛")
-        print("    A   B   C   D   E   F   G   H")
+        print("\n  ┗━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┛")
+        print("     A    B    C    D    E    F    G    H")
 
 
 Chess = ChessBoard()
