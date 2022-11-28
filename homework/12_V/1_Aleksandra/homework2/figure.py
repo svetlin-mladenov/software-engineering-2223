@@ -43,12 +43,6 @@ class King(Figure):
         self.name = "K"
 
 
-class GhostPawn(Figure):
-    def __init__(self, color):
-        super().__init__(color)
-        self.name = "GP"
-
-
 class Pawn(Figure):
     def __init__(self, color):
         super().__init__(color)
