@@ -39,36 +39,44 @@ class Chess_piece(Enum):
     BQUEEN = _QUEEN|_BLACK
     
 
-    def printFigure(figure):
-        _MAP = {
-            Chess_piece.EMPTY:" ",
-            Chess_piece.WPAWN:"♟",
-            Chess_piece.WROOCK:"♜",
-            Chess_piece.WBISHOP:"♝",
-            Chess_piece.WKNIGHT:"♞",
-            Chess_piece.WQUEEN:"♛",
-            Chess_piece.WKING:"♚",
-            Chess_piece.BPAWN:"♙",
-            Chess_piece.BROOCK:"♖",
-            Chess_piece.BBISHOP:"♗",
-            Chess_piece.BKNIGHT:"♘",
-            Chess_piece.BQUEEN:"♕",
-            Chess_piece.BKING:"♔"
+    
 
-        }
-        return _MAP[figure]
-
-
+class Chess_position:
+    piece:Chess_piece = Chess_piece.EMPTY,
+    x:int = 0
+    y:int = 0
+    _MAP = {
+        Chess_piece.EMPTY:" ",
+        Chess_piece.WPAWN:"♟",
+        Chess_piece.WROOCK:"♜",
+        Chess_piece.WBISHOP:"♝",
+        Chess_piece.WKNIGHT:"♞",
+        Chess_piece.WQUEEN:"♛",
+        Chess_piece.WKING:"♚",
+        Chess_piece.BPAWN:"♙",
+        Chess_piece.BROOCK:"♖",
+        Chess_piece.BBISHOP:"♗",
+        Chess_piece.BKNIGHT:"♘",
+        Chess_piece.BQUEEN:"♕",
+        Chess_piece.BKING:"♔"
+    }
+    def getStringFigure(self):
+        
+        return self._MAP[self.piece]
+    def __init__(self,piece,x,y):
+        self.piece = piece
+        self.x = x
+        self.y = y
 class Chess_board:
     field = [
-        [Chess_piece.BROOCK,Chess_piece.BKNIGHT,Chess_piece.BBISHOP,Chess_piece.BKING,Chess_piece.BQUEEN,Chess_piece.BBISHOP,Chess_piece.BKNIGHT,Chess_piece.BROOCK],
-        [Chess_piece.BPAWN for i in range(8)],#faster typing
-        [Chess_piece.EMPTY for i in range(8)],
-        [Chess_piece.EMPTY for i in range(8)],
-        [Chess_piece.EMPTY for i in range(8)],
-        [Chess_piece.EMPTY for i in range(8)],
-        [Chess_piece.WPAWN for i in range(8)],
-        [Chess_piece.WROOCK,Chess_piece.WKNIGHT,Chess_piece.WBISHOP,Chess_piece.WKING,Chess_piece.WQUEEN,Chess_piece.WBISHOP,Chess_piece.WKNIGHT,Chess_piece.WROOCK]
+        [Chess_position(Chess_piece.BROOCK,0,0),Chess_position(Chess_piece.BKNIGHT,1,0),Chess_position(Chess_piece.BBISHOP,2,0), Chess_position(Chess_piece.BKING,3,0),Chess_position(Chess_piece.BQUEEN,4,0),Chess_position(Chess_piece.BBISHOP,5,0),Chess_position(Chess_piece.BKNIGHT,6,0),Chess_position(Chess_piece.BROOCK,7,0)],
+        [Chess_position(Chess_piece.BPAWN,i,1) for i in range(8)],#faster typing
+        [Chess_position(Chess_piece.EMPTY,i,2) for i in range(8)],
+        [Chess_position(Chess_piece.EMPTY,i,3) for i in range(8)],
+        [Chess_position(Chess_piece.EMPTY,i,4) for i in range(8)],
+        [Chess_position(Chess_piece.EMPTY,i,5) for i in range(8)],
+        [Chess_position(Chess_piece.WPAWN,i,6) for i in range(8)],
+        [Chess_position(Chess_piece.WROOCK,0,7),Chess_position(Chess_piece.WKNIGHT,1,7),Chess_position(Chess_piece.WBISHOP,2,7),Chess_position(Chess_piece.WKING,3,7),Chess_position(Chess_piece.WQUEEN,4,7),Chess_position(Chess_piece.WBISHOP,5,7),Chess_position(Chess_piece.WKNIGHT,6,7),Chess_position(Chess_piece.WROOCK,7,7)]
     ]
 
     def _getOrder(indexX,indexY):
@@ -81,7 +89,7 @@ class Chess_board:
         for indexY,line in enumerate(self.field):
             for indexX,figure in enumerate(line):
                 order = Chess_board._getOrder(indexX,indexY) #quick check if field is suposed to be white or black/grey used in the ifs to determine color 
-                cprint(Chess_piece.printFigure(figure)+" ", end='',color=Chess_board._getTextColor(order),on_color=Chess_board._getOnColor(order))
+                cprint(figure.getStringFigure()+" ", end='',color=Chess_board._getTextColor(order),on_color=Chess_board._getOnColor(order))
             print("")
 
 board = Chess_board()
