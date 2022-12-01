@@ -1,14 +1,26 @@
 import os
 import sqlite3
 import click
-from flask import Flask, redirect, render_template, request
+from flask import Flask, g, redirect, render_template, request, session
+from werkzeug.security import generate_password_hash
 
 app = Flask(__name__, instance_relative_config=True)
+app.config.from_mapping(
+    SECRET_KEY="dev"
+)
 
 
 @app.route("/")
 def index():
     """Render our homepage."""
+    email = session.get("email", None)
+    if email is not None:
+        db = get_db()
+        user = db.execute(
+            "SELECT * from users where email=?",
+            (email,)
+        ).fetchone()
+        g.user = user
     return render_template("index.html")
 
 
@@ -18,11 +30,32 @@ def signup():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
-        print(f"create user {email} {password}")
+        db = get_db()
+        db.execute(
+            "INSERT INTO users VALUES (?, ?)",
+            (email, generate_password_hash(password))
+        )
+        db.commit()
+        session["email"] = email
         return redirect("/")
 
     return render_template("signup.html")
 
+
+def get_db():
+    if "db" not in g:
+        db_filename = os.path.join(app.instance_path, "otlichnik.db")
+        g.db = sqlite3.connect(db_filename)
+        g.db.row_factory = sqlite3.Row
+    return g.db
+
+
+def close_db(exp=None):
+    db = g.pop("db", None)
+    if db is not None:
+        db.close()
+
+app.teardown_request(close_db)
 
 @click.command(short_help="Create database if not exists.")
 def init_db():
