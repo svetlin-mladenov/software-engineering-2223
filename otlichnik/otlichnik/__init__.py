@@ -1,8 +1,8 @@
 import os
 import sqlite3
 import click
-from flask import Flask, g, redirect, render_template, request, session
-from werkzeug.security import generate_password_hash
+from flask import Flask, g, redirect, render_template, request, session, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_mapping(
@@ -40,6 +40,24 @@ def signup():
         return redirect("/")
 
     return render_template("signup.html")
+
+
+@app.route("/signin", methods=("GET", "POST"))
+def signin():
+    """Render signin page."""
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+        db = get_db()
+        user = db.execute(
+            "SELECT * from users where email=?",
+            (email,)
+        ).fetchone()
+        if check_password_hash(user["pwhash"], password):
+            session["email"] = email
+            return redirect("/")
+        flash("Invalide username or password")
+    return render_template("signin.html")
 
 
 def get_db():
