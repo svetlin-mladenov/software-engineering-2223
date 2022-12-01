@@ -43,6 +43,7 @@ def signup():
 
 
 def get_db():
+    """Return database and cache it per request."""
     if "db" not in g:
         db_filename = os.path.join(app.instance_path, "otlichnik.db")
         g.db = sqlite3.connect(db_filename)
@@ -50,12 +51,15 @@ def get_db():
     return g.db
 
 
-def close_db(exp=None):
+def close_db(_exp=None):
+    """Close db for request if any."""
     db = g.pop("db", None)
     if db is not None:
         db.close()
 
+
 app.teardown_request(close_db)
+
 
 @click.command(short_help="Create database if not exists.")
 def init_db():
