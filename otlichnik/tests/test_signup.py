@@ -29,3 +29,16 @@ def test_signup_new_user(client):
         "password": "password",
     })
     assert response.headers["Location"] == "/"
+
+
+def test_signup_existing_user(client):
+    client.post("/signup", data={
+        "email": "mail@mail.com",
+        "password": "password",
+    })
+    response = client.post("/signup", data={
+        "email": "mail@mail.com",
+        "password": "password",
+    })
+    assert response.headers.get("Location") != "/"
+    assert 200 <= response.status_code < 300

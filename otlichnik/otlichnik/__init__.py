@@ -38,13 +38,19 @@ def create_app(config=None):
             email = request.form["email"]
             password = request.form["password"]
             db = get_db()
-            db.execute(
-                "INSERT INTO users VALUES (?, ?)",
-                (email, generate_password_hash(password))
-            )
-            db.commit()
-            session["email"] = email
-            return redirect("/")
+            error = None
+            try:
+                db.execute(
+                    "INSERT INTO users VALUES (?, ?)",
+                    (email, generate_password_hash(password))
+                )
+                db.commit()
+            except db.IntegrityError:
+                error = "User already exists."
+            if not error:
+                session["email"] = email
+                return redirect("/")
+            flash(error)
 
         return render_template("signup.html")
 
