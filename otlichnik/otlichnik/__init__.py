@@ -59,6 +59,11 @@ def signin():
         flash("Invalide username or password")
     return render_template("signin.html")
 
+@app.route("/signout")
+def signout():
+    session.clear()
+    return redirect("/")
+
 
 def get_db():
     """Return database and cache it per request."""
