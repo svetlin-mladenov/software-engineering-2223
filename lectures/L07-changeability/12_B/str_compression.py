@@ -1,27 +1,26 @@
-from copyreg import constructor
-from os import truncate
-
-from pkg_resources import resource_string
-
-
 def compress(message):
+    """Compress message using run length encoding
+
+    :param message: string to encode
+    """
     last = ""
     compressed = ""
+
     first = True
     consecutive_matches = 1
-    for c in message:
+    for char in message:
         if first:
-            last = c
+            last = char
             first = False
-            compressed += c
+            compressed += char
         else:
-            if c == last:
+            if char == last:
                 consecutive_matches += 1
             else:
                 compressed += str(consecutive_matches)
-                compressed += c
+                compressed += char
                 consecutive_matches = 1
-            last = c
+            last = char
     compressed += str(consecutive_matches)
     if len(compressed) > len(message):
         return message
@@ -29,8 +28,11 @@ def compress(message):
 
 
 def test_compress():
+    # pylint: disable=missing-function-docstring
     assert compress("aabcccccaaa") == "a2b1c5a3"
     assert compress("aabccccca") == "a2b1c5a1"
 
+
 def test_inefficient_compression():
+    # pylint: disable=missing-function-docstring
     assert compress("abc") == "abc"

@@ -1,12 +1,7 @@
-from copyreg import constructor
-from os import truncate
-
-from pkg_resources import resource_string
-
-
 def compress(message):
     last = ""
     compressed = ""
+
     first = True
     consecutive_matches = 1
     for c in message:
@@ -31,6 +26,7 @@ def compress(message):
 def test_compress():
     assert compress("aabcccccaaa") == "a2b1c5a3"
     assert compress("aabccccca") == "a2b1c5a1"
+
 
 def test_inefficient_compression():
     assert compress("abc") == "abc"

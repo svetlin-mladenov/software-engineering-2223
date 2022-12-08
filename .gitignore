@@ -1,3 +1,11 @@
 __pycache__
 .coverage
 .ipynb_checkpoints
+.vscode
+.idea
+target
+.project
+.classpath
+.settings
+.DS_Store
+*.class
