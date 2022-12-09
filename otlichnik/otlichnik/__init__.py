@@ -34,17 +34,20 @@ def create_app(config=None):
     @app.route("/signup", methods=("GET", "POST"))
     def signup():
         """Render sign-up page"""
+        error = None
         if request.method == "POST":
             email = request.form["email"]
             password = request.form["password"]
             db = get_db()
-            error = None
             try:
-                db.execute(
-                    "INSERT INTO users VALUES (?, ?)",
-                    (email, generate_password_hash(password))
-                )
-                db.commit()
+                if email_validation(email):
+                    db.execute(
+                        "INSERT INTO users VALUES (?, ?)",
+                        (email, generate_password_hash(password))
+                    )
+                    db.commit()
+                else:
+                    error = "The given email is not valid"
             except db.IntegrityError:
                 error = "User already exists."
             if not error:
@@ -52,7 +55,7 @@ def create_app(config=None):
                 return redirect("/")
             flash(error)
 
-        return render_template("signup.html")
+        return render_template("signup.html"), 400 if error else 200
 
     @app.route("/signin", methods=("GET", "POST"))
     def signin():
@@ -109,3 +112,9 @@ def init_db():
     db = get_db()
     with current_app.open_resource("schema.sql", "rt") as f:
         db.execute(f.read())
+
+
+def email_validation(email: str):
+    if "@" in email and not email.endswith("@") and not email.startswith("@"):
+        return True
+    return False
