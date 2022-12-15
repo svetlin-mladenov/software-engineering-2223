@@ -1,3 +1,4 @@
+import re
 import os
 import sqlite3
 import click
@@ -113,8 +114,20 @@ def init_db():
     with current_app.open_resource("schema.sql", "rt") as f:
         db.execute(f.read())
 
+ 
+regex = r'\b[A-Za-z0-9._]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
 def email_validation(email: str):
-    if "@" in email and not email.endswith("@") and not email.startswith("@"):
-        return True
-    return False
+    # pass the regular expression
+    # and the string into the fullmatch() method
+
+    # check if email has consecutive dots
+    if '..' in email:
+        return False
+    # check if email has consecutive @
+    if '@@' in email:
+        return False
+    # check if there is a dot before @
+    if '.@' in email:
+        return False
+    return re.fullmatch(regex, email)

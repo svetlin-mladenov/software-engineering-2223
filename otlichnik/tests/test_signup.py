@@ -61,6 +61,11 @@ def test_email_validation_valid_email(email):
     ".name@gmail.com",
     "name.@gmail.com",
     "name..name@gmail.com",
+    "pesho@.@gmail.com",
+    "pesho!!@gmail.com",
+    "pesho+@gmail.com",
+    "pesho-@gmail.com",
+    "pesho-gosho@gmail.com",
 ])
 def test_email_validation_invalid_email(email):
     assert not email_validation(email)
