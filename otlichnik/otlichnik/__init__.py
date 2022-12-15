@@ -6,6 +6,7 @@ from flask import (
     request, session, flash
 )
 from werkzeug.security import generate_password_hash, check_password_hash
+import re
 
 
 def create_app(config=None):
@@ -115,6 +116,6 @@ def init_db():
 
 
 def email_validation(email: str):
-    if "@" in email and not email.endswith("@") and not email.startswith("@"):
-        return True
-    return False
+    regex = '^[_a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)@[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(.[a-zA-Z]{2,4})$'
+    return re.match(regex, email)
+
