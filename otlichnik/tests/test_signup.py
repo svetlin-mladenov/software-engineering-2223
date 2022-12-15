@@ -44,12 +44,26 @@ def test_signup_existing_user(client):
     assert response.status_code == 400
 
 
-def test_invalid_email():
-    assert email_validation("hsafiuashfi@gmail.com")
-    assert not email_validation("sidhiudshsweh")
-    assert not email_validation("")
-    assert not email_validation("sidhiudshsweh@")
-    assert not email_validation("@sidhiudshsweh")
+@pytest.mark.parametrize("email", [
+    "hsafiuashfi@gmail.com",
+    "name.name@gmail.com",
+])
+def test_email_validation_valid_email(email):
+    assert email_validation(email)
+
+
+@pytest.mark.parametrize("email", [
+    "sidhiudshsweh",
+    "",
+    "sidhiudshsweh@",
+    "@sidhiudshsweh",
+    "name@gmail.",
+    ".name@gmail.com",
+    "name.@gmail.com",
+    "name..name@gmail.com",
+])
+def test_email_validation_invalid_email(email):
+    assert not email_validation(email)
 
 
 def test_request_invalid_email(client):
