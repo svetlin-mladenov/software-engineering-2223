@@ -47,6 +47,7 @@ def test_signup_existing_user(client):
 @pytest.mark.parametrize("email", [
     "hsafiuashfi@gmail.com",
     "name.name@gmail.com",
+    "name@r1-eu.p6-site.com",
 ])
 def test_email_validation_valid_email(email):
     assert email_validation(email)
