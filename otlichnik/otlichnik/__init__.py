@@ -116,6 +116,5 @@ def init_db():
 
 
 def email_validation(email: str):
-    email_regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]{2,})+')
-    
+    email_regex = r'([A-Za-z0-9]+[.\-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+'
     return re.fullmatch(email_regex, email)
