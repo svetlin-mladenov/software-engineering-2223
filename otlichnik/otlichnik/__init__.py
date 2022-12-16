@@ -1,4 +1,5 @@
 import os
+import re
 import sqlite3
 import click
 from flask import (
@@ -115,6 +116,6 @@ def init_db():
 
 
 def email_validation(email: str):
-    if "@" in email and not email.endswith("@") and not email.startswith("@"):
-        return True
-    return False
+    email_regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]{2,})+')
+    
+    return re.fullmatch(email_regex, email)
