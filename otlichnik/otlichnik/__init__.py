@@ -118,3 +118,8 @@ def init_db():
 def email_validation(email: str):
     email_regex = r'([A-Za-z0-9]+[.\-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+'
     return re.fullmatch(email_regex, email)
+
+
+def password_validation(password: str):
+    password_regex = r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+    return re.fullmatch(password_regex, password)
