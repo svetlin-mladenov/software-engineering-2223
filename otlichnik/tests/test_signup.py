@@ -1,6 +1,6 @@
 # pylint: disable=missing-function-docstring
 import pytest
-from otlichnik import create_app, init_db
+from otlichnik import *
 
 
 @pytest.fixture
@@ -41,4 +41,39 @@ def test_signup_existing_user(client):
         "password": "password",
     })
     assert response.headers.get("Location") != "/"
-    assert 200 <= response.status_code < 300
+    assert response.status_code == 400
+
+
+@pytest.mark.parametrize("email", [
+    "hsafiuashfi@gmail.com",
+    "name.name@gmail.com",
+    "name@r1-eu.p6-site.com",
+    "pesho@ip127.a.c.d.abv.bg",
+])
+def test_email_validation_valid_email(email):
+    assert email_validation(email)
+
+
+@pytest.mark.parametrize("email", [
+    "sidhiudshsweh",
+    "",
+    "sidhiudshsweh@",
+    "@sidhiudshsweh",
+    "name@gmail.",
+    ".name@gmail.com",
+    "name.@gmail.com",
+    "name..name@gmail.com",
+    "pesho@gosho@gmail.com",
+    "__pesho@abv.bg",
+    "___-@abv.bg",
+])
+def test_email_validation_invalid_email(email):
+    assert not email_validation(email)
+
+
+def test_request_invalid_email(client):
+    response = client.post("/signup", data={
+        "email": "mailmail.com",
+        "password": "password",
+    })
+    assert response.status_code == 400
