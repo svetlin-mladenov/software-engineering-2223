@@ -1,6 +1,6 @@
 # Otlichnik
 
-## Set-up
+## Project set-up
 
 ```bash
 cd otlichnik
@@ -8,13 +8,13 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-## Running tests
+## Run the tests
 
 ```bash
 pytest
 ```
 
-If pytest is not on your path try rinning
+If pytest is not on your path try running
 
 ```bash
 python -m pytest
