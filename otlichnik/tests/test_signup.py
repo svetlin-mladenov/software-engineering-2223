@@ -77,3 +77,39 @@ def test_request_invalid_email(client):
         "password": "password",
     })
     assert response.status_code == 400
+
+
+@pytest.mark.parametrize("password", [
+    "a",
+    "",
+    "aA1#$",
+    "aA11111111111111111111111",
+    "aA####################",
+    "a1$assssssssssssgg",
+    "A1%AGJKMDSGSIDNFGSDIGN",
+    "AAAaaa12*&^()&$#ufAd04AdjsgojsndsonginerofdANg3insvomecumsumrgf43erjwidpDBUSNOGJNVR$^%&*&@)(%_ivostrInga@52385493i6ot4ejrgh79yhuigrntfdjhgred3MbeDDediofkgohnebdfjgbnfdsrodugnlj548r6e9809rt4y5cumcumruhgonfdj4g5htegruoijf@#$%^&*(23456789DFstringstringovSTRINGOVGJKeryufdbfu?>?>:}:_+P)U!@&^$YRIUGHENWT&WUEOJGNasgsdghhhivostr",
+    " ",
+    "AAAAAAAAAAAAAAAAAAAAA",
+    "111111111111111111111111",
+    "^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+])
+def test_password_validation_invalid_password(password):
+    assert not password_validation(password)
+
+
+@pytest.mark.parametrize("password", [
+    "anG3i@@@LLLLLLLL@J4M3sCh4rl3s",
+    "r3gEXSGaYge!!!!!",
+    "8aA#8aA#8aA*8aaaaaaaa",
+    "AAAAAAAaAAAAA4UGH$4",
+    "mangalmanganovmanganovanganovalkanoV#3",
+    "stringString0vStringcHov@StrivoIvongStringchovcong3",
+    "NIKSATa3333333333333333333333###3#333333",
+    "lowercaseUPPERCASE1234567890!@#$%^&*()QWERTYUIOPAASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm;",
+    "HEEhe3#HEEHAWWWWGRRRRRRRRRRRRRR",
+    "_a-A#3as______ASF",
+    "mkaao@TRWAS(jf323412323t",
+])
+def test_password_validation_valid_password(password):
+    assert password_validation(password)
