@@ -77,3 +77,34 @@ def test_request_invalid_email(client):
         "password": "password",
     })
     assert response.status_code == 400
+
+
+@pytest.mark.parametrize("password", [
+    "1Aqw123!",
+    "123!!!Aa*",
+    "1Aqw1qw*"
+])
+def test_password_validation_valid_password(password):
+    assert password_validation(password)
+
+
+@pytest.mark.parametrize("password", [
+    "1Aqw1_23!",
+    "1234",
+    "Abcd"
+])
+def test_password_validation_invalid_password(password):
+    assert not password_validation(password)
+
+
+def test_signup_empty_credentials(client):
+    client.post("/signup", data={
+        "email": "",
+        "password": "",
+    })
+    response = client.post("/signup", data={
+        "email": "",
+        "password": "",
+    })
+    assert response.headers.get("Location") != "/"
+    assert response.status_code == 400
