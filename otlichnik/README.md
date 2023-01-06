@@ -3,7 +3,6 @@
 ## Project set-up
 
 ```bash
-cd otlichnik
 pip install -r requirements.txt
 pip install -e .
 ```
