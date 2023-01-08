@@ -49,7 +49,53 @@ class Chess:
             buffer += "-"
         print(buffer)
 
+    def FEN_to_Board(self, fen):
+        self.clear_board()
+        i = -1
+        for row in fen.split('/'):
+            i += 1
+            j = -1
+            for c in row:
+                j += 1
+                if c == ' ':
+                    break
+                elif c in '12345678':
+                    j += int(c) - 1
+                elif c == 'p':
+                    self.board[i][j] = figure.Pawn(False)
+                elif c == 'P':
+                    self.board[i][j] = figure.Pawn(True)
+                elif c == 'k':
+                    self.board[i][j] = figure.King(False)
+                elif c == 'K':
+                    self.board[i][j] = figure.King(True)
+                elif c == 'q':
+                    self.board[i][j] = figure.Queen(False)
+                elif c == 'Q':
+                    self.board[i][j] = figure.Queen(True)
+                elif c == 'r':
+                    self.board[i][j] = figure.Rook(False)
+                elif c == 'R':
+                    self.board[i][j] = figure.Rook(True)
+                elif c == 'n':
+                    self.board[i][j] = figure.Knight(False)
+                elif c == 'N':
+                    self.board[i][j] = figure.Knight(True)
+                elif c == 'b':
+                    self.board[i][j] = figure.Bishop(False)
+                elif c == 'B':
+                    self.board[i][j] = figure.Bishop(True)
+
+    def clear_board(self):
+        for i in range(8):
+            for j in range(8):
+                self.board[i][j] = None
+
 
 os.system('color')
 Game = Chess()
+print("Starting position")
+Game.print_board()
+print("FEN position")
+Game.FEN_to_Board("r5rk/1p1q1p1p/p7/3N4/3PnB1b/2P2Q1P/PP3P2/R3R2K b - - 0 25")
 Game.print_board()
