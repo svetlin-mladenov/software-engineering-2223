@@ -1,5 +1,6 @@
 import termcolor
 
+# A map for every figure - used for easier FEN parse
 figures_map = {
     'r': ' ♜  ',
     'n': ' ♞  ',
@@ -61,12 +62,14 @@ class ChessBoard:
                             new_row.append(figures_map[char])
 
                         else:
+                            # Inavlid char handle
                             raise ValueError("Invalid character found in FEN string: " + char)
 
                 if count > 0:
                     new_row.extend(["    " for _ in range(count)])
 
                 if len(new_row) != 8:
+                    # Invalid input handle
                     raise ValueError("Invalid number of figures in a row")
 
                 board.append(new_row)
