@@ -1,7 +1,5 @@
 from termcolor import colored, cprint
 import math
-
- 
 import colorama # solve problems with termcolor for windows cmd
 colorama.init(autoreset = "True")
 
