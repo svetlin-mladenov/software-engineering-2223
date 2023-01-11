@@ -1,6 +1,5 @@
 import termcolor
 
-# A map for every figure - used for easier FEN parse
 figures_map = {
     'r': ' ♜  ',
     'n': ' ♞  ',
@@ -62,24 +61,24 @@ class ChessBoard:
                             new_row.append(figures_map[char])
 
                         else:
-                            # Inavlid char handle
                             raise ValueError("Invalid character found in FEN string: " + char)
 
                 if count > 0:
                     new_row.extend(["    " for _ in range(count)])
 
                 if len(new_row) != 8:
-                    # Invalid input handle
                     raise ValueError("Invalid number of figures in a row")
 
                 board.append(new_row)
 
-            # Fetch the last FEN ars
-            move_turn, move_number = fen_list[1], fen_list[-1]
+            try:
+                move_turn, move_number = fen_list[1], fen_list[-1]
 
-            print("Move Turn: ", move_turn)
+                print("Move Turn: ", move_turn)
 
-            print("Move Number: ", move_number)
+                print("Move Number: ", move_number)
+            except IndexError:
+                print("No additional position info was provided")
 
             return board
 
@@ -100,6 +99,12 @@ class ChessBoard:
                     print("\n", end="")
 
 fen_string = "r5rk/1p1q1p1p/8/3N4/3PnB1b/2P2Q1P/PP3P2/R3R2K b - - 0 25"
+print(f"Enter FEN string (Default: {fen_string}): ", end="")
+
+new_fen = input()
+
+if new_fen != "":
+    fen_string = new_fen
 
 test_board = ChessBoard(8, 8, fen_string)
 
