@@ -72,7 +72,7 @@ def create_app(config=None):
             if check_password_hash(user["pwhash"], password):
                 session["email"] = email
                 return redirect("/")
-            flash("Invalide username or password")
+            flash("Invalid username or password")
         return render_template("signin.html")
 
     @app.route("/signout")
