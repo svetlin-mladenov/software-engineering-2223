@@ -4,6 +4,8 @@ Here are a few topics about prossible reports:
  * Floating point numbers - representation and IEEE754, operations, infinities, nans, positive and negative zero, subnormal values.
  * Data driven development (that one is more difficult).
  * Tooling (like static code analysis) in your favorinte programming langauge (not python as these will be covered in the course).
+ * RAII in C++ - advantages and disadvatages.
+ * Software engineering in the aerospace industry.
  * Softskills in software engineering.
 
 If you have your own idea please discuss it first with your teather.

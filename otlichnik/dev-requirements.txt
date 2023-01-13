@@ -1,0 +1,4 @@
+pytest
+flake8
+pylint==2.15.5
+mypy==0.991
