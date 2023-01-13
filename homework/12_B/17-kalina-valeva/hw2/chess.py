@@ -1,30 +1,46 @@
-from dataclasses import dataclass
 
-whiteKing = "♔"
-whiteQueen = "♕"
-whiteRook = "♖"
-whiteBishop = "♗"
-whiteHorse = "♘"
-whitePawn = "♙"
-blackKing = "♚"
-blackQueen = "♛"
-blackRook = "♜"
-blackBishop = "♝"
-blackHorse = "♞"
-blackPawn = "♟︎"
 
-@dataclass
-class Figura:
-  value: str = "[]"
-
-  def __str__(self):
-    return self.value
-
+chess= {
+    "K": "♔",
+    "Q": "♕",
+    "R": "♖",
+    "B": "♗",
+    "N": "♘",
+    "P": "♙",
+    "k": "♚",
+    "q": "♛",
+    "r": "♜",
+    "b": "♝",
+    "n": "♞",
+    "p": "♟︎"
+}
+    
 class Duska:
-    figuri = [Figura(whiteRook), Figura(whiteHorse), Figura(whiteBishop),Figura(whiteQueen), Figura(whiteKing), Figura(whiteBishop), Figura(whiteHorse), Figura(whiteRook)] + [Figura(whitePawn)] * 8 + [Figura()] * 32 + [Figura(blackPawn)] * 8 + [Figura(blackRook), Figura(blackHorse), Figura(blackBishop),Figura(blackKing), Figura(blackQueen), Figura(blackBishop), Figura(blackHorse), Figura(blackRook)]
+
+    def __init__(self):
+        self.figuri = []
+        self.count = 0
+        
+    def read_FEN(self, str):
+        for s in str:
+            if(s != " "):
+                if(s != "/"):
+                    if(s.isdigit() == False):
+                        self.figuri.append((chess[s]))
+                        self.count = self.count + 1
+                    else:
+                        for i in range(int(s)):
+                            self.figuri.append('X')
+                        self.count = self.count + int(s)
+            else:
+                return
+            
     def print(self):
         for i in range(64):
-            print(self.figuri[i], end = chr(9) if (i+1) % 8 != 0 else '\n')
+            print(self.figuri[i], end = ' ' if (i+1) % 8 != 0 else '\n')
+
+d = Duska()
+d.read_FEN("r5rk/1p1q1p1p/p7/3N4/3PnB1b/2P2Q1P/PP3P2/R3R2K b - - 0 25")
+d.print()
 
 
-Duska().print()
