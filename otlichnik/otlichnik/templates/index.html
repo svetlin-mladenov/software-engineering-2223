@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+Welcome to Otlichnik
+{% endblock %}
+
+{% block content %}
+{% if "user" in g %}
+Welcome {{ g.user.email }}
+<a href="/signout">Sign-out</a>
+{% else %}
+<a href="/signin">Sign-in</a>
+<a href="/signup">Sign-up</a>
+{% endif %}
+<h1>Hello from index.html</h1>
+{% endblock %}
