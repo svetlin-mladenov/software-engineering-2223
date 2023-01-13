@@ -121,5 +121,64 @@ class Board:
 			print(f" {8 - y} ")
 		print("    A  B  C  D  E  F  G  H ")
 
-board = Board()
+	def set_FEN_position(self, position: str):
+		position = position.strip()
+		position = position[:position.find(" ")]
+		for i in range (1, 9):
+			position = position.replace(str(i), " " * i)
+		position = position.split("/", 7)
+		newBoard = Board(empty = True)
+
+		for y in range(0, 8):
+			for x in range(0, 8):
+				pieceType = None
+				pieceColor = None
+				match position[y][x]:
+					case "P":
+						pieceType = Piece.Type.PAWN
+						pieceColor = Piece.Color.WHITE
+					case "p":
+						pieceType = Piece.Type.PAWN
+						pieceColor = Piece.Color.BLACK
+					case "B":
+						pieceType = Piece.Type.BISHOP
+						pieceColor = Piece.Color.WHITE
+					case "b":
+						pieceType = Piece.Type.BISHOP
+						pieceColor = Piece.Color.BLACK
+					case "N":
+						pieceType = Piece.Type.KNIGHT
+						pieceColor = Piece.Color.WHITE
+					case "n":
+						pieceType = Piece.Type.KNIGHT
+						pieceColor = Piece.Color.BLACK
+					case "R":
+						pieceType = Piece.Type.ROOK
+						pieceColor = Piece.Color.WHITE
+					case "r":
+						pieceType = Piece.Type.ROOK
+						pieceColor = Piece.Color.BLACK
+					case "Q":
+						pieceType = Piece.Type.QUEEN
+						pieceColor = Piece.Color.WHITE
+					case "q":
+						pieceType = Piece.Type.QUEEN
+						pieceColor = Piece.Color.BLACK
+					case "K":
+						pieceType = Piece.Type.KING
+						pieceColor = Piece.Color.WHITE
+					case "k":
+						pieceType = Piece.Type.KING
+						pieceColor = Piece.Color.BLACK
+					case _:
+						pieceType = Piece.Type.NONE
+						pieceColor = Piece.Color.NONE
+
+				newBoard.pieces[x][y] = Piece(pieceType, pieceColor)
+
+		self.pieces = newBoard.pieces
+
+
+board = Board(empty = True)
+board.set_FEN_position("r5rk/1p1q1p1p/p7/3N4/3PnB1b/2P2Q1P/PP3P2/R3R2K b - - 0 25")
 board.print_board()
