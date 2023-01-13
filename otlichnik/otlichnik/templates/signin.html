@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sign-in for Otlichnik
+{% endblock %}
+
+{% block content %}
+Sign-in
+<form method="post">
+    <input type="email" name="email" placeholder="Enter email">
+    <input type="password" name="password" placeholder="Enter password">
+    <button type="submit">Sign-in</button>
+</form>
+{% endblock %}
