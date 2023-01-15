@@ -1,0 +1,27 @@
+import termcolor
+
+class ChessPosition:
+    def __init__(self):
+        self.board = [
+            ["r", "n", "b", "q", "k", "b", "n", "r"],
+            ["p", "p", "p", "p", "p", "p", "p", "p"],
+            [" ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " "],
+            ["P", "P", "P", "P", "P", "P", "P", "P"],
+            ["R", "N", "B", "Q", "K", "B", "N", "R"]
+        ]
+
+    def print_board(self):
+        for i, row in enumerate(self.board):
+            for j, piece in enumerate(row):
+                if (i + j) % 2 == 0:
+                    color = "white"
+                else:
+                    color = "grey"
+                print(termcolor.colored(piece, color), end=" ")
+            print()
+
+position = ChessPosition()
+position.print_board()
