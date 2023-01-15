@@ -2,6 +2,7 @@ __pycache__
 .coverage
 .ipynb_checkpoints
 .vscode
+.vs
 .idea
 target
 .project
