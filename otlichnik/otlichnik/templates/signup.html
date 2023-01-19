@@ -5,10 +5,17 @@ Sign-up for Otlichnik
 {% endblock %}
 
 {% block content %}
-Sign-up
-<form method="post">
-    <input type="email" name="email" placeholder="Enter email">
-    <input type="password" name="password" placeholder="Enter password">
-    <button type="submit">Sign-up</button>
+<div class="w3-container w3-third"></div>
+<div class="w3-card-4 w3-third">
+<h3 class="w3-container w3-blue">Sign-up</h3>
+<form class="w3-container" method="post">
+    <label>E-Mail</label>
+    <input class="w3-input" type="email" name="email">
+    <p />
+    <label>Password</label>
+    <input class="w3-input" type="password" name="password">
+    <p />
+    <button class="w3-button w3-green" type="submit">Sign-up</button>
 </form>
+</div>
 {% endblock %}
