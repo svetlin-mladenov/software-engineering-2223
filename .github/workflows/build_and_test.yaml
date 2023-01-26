@@ -30,3 +30,7 @@ jobs:
       - name: Test with pytest
         run: |
           pytest
+      - name: Enforce PEP-8-style using flake8
+        run: |
+          flake8 otlichnik
+          flake8 tests
