@@ -34,3 +34,7 @@ jobs:
         run: |
           flake8 otlichnik
           flake8 tests
+      - name: Check with pylint
+        run: |
+          pylint otlichnik
+          pylint tests
