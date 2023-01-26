@@ -115,15 +115,15 @@ def init_db():
         db.execute(f.read())
 
 
-def email_validation(email: str):
+def email_validation(email: str) -> bool:
     """Validate email."""
     email_regex = \
         r'([A-Za-z0-9]+[.\-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+'
-    return re.fullmatch(email_regex, email)
+    return re.fullmatch(email_regex, email) is not None
 
 
-def password_validation(password: str):
+def password_validation(password: str) -> bool:
     "Validate password."
     password_regex = \
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,256}$'
-    return re.fullmatch(password_regex, password)
+    return re.fullmatch(password_regex, password) is not None
