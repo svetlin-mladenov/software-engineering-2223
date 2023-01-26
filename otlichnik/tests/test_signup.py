@@ -1,6 +1,8 @@
 # pylint: disable=missing-function-docstring
 import pytest
-from otlichnik import *
+from otlichnik import (
+    create_app, init_db, password_validation, email_validation
+)
 
 
 @pytest.fixture
@@ -87,7 +89,7 @@ def test_request_invalid_email(client):
     "aA####################",
     "a1$assssssssssssgg",
     "A1%AGJKMDSGSIDNFGSDIGN",
-    "AAAaaa12*&^()&$#ufAd04AdjsgojsndsonginerofdANg3insvomecumsumrgf43erjwidpDBUSNOGJNVR$^%&*&@)(%_ivostrInga@52385493i6ot4ejrgh79yhuigrntfdjhgred3MbeDDediofkgohnebdfjgbnfdsrodugnlj548r6e9809rt4y5cumcumruhgonfdj4g5htegruoijf@#$%^&*(23456789DFstringstringovSTRINGOVGJKeryufdbfu?>?>:}:_+P)U!@&^$YRIUGHENWT&WUEOJGNasgsdghhhivostr",
+    "AAAaaa12*&^()&$#ufAd04AdjsgojsndsonginerofdANg3insvomecum" * 10,
     " ",
     "AAAAAAAAAAAAAAAAAAAAA",
     "111111111111111111111111",
@@ -106,7 +108,7 @@ def test_password_validation_invalid_password(password):
     "mangalmanganovmanganovanganovalkanoV#3",
     "stringString0vStringcHov@StrivoIvongStringchovcong3",
     "NIKSATa3333333333333333333333###3#333333",
-    "lowercaseUPPERCASE1234567890!@#$%^&*()QWERTYUIOPAASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm;",
+    "lowercaseUPPERCASE1234567890!@#$%^&*()QWERTYUIOPAASDFGHJKLZXCVBNM;",
     "HEEhe3#HEEHAWWWWGRRRRRRRRRRRRRR",
     "_a-A#3as______ASF",
     "mkaao@TRWAS(jf323412323t",
